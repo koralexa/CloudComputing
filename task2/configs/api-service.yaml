@@ -9,7 +9,7 @@ spec:
     - name: api-port
       port: 7950
       targetPort: 9000
-      nodePort: 4000
+      nodePort: 30000
   type: NodePort
   selector:
     service: api
