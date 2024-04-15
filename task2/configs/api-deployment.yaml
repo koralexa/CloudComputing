@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    service: api
+  name: api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      service: api
+  template:
+    metadata:
+      labels:
+        network/task2-default: "true"
+        service: api
+    spec:
+      containers:
+        - env:
+            - name: MYSQL_DB_NAME
+              value: bookstore
+            - name: MYSQL_HOST
+              value: mysql
+            - name: MYSQL_PASS
+              value: admin
+            - name: MYSQL_PORT
+              value: "3306"
+            - name: MYSQL_USER
+              value: root
+          image: koralexa/task2-api
+          name: api
+          ports:
+            - containerPort: 9000
+              hostPort: 7950
+              protocol: TCP
+      restartPolicy: Always
